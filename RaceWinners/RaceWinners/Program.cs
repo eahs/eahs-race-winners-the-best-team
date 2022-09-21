@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RaceWinners
@@ -10,14 +11,24 @@ namespace RaceWinners
             DataService ds = new DataService();
  
             // Asynchronously retrieve the group (class) data
-            var data = await ds.GetGroupRanksAsync();
+            var groups = await ds.GetGroupRanksAsync();
 
-            for (int i = 0; i < data.Count; i++)
+            //var sorted = groups.OrderBy(group => group.Ranks.Average()).ToList();
+     
+            for (int i = 0; i < groups.Count; i++)
             {
-                // Combine the ranks to print as a list
-                var ranks = String.Join(", ", data[i].Ranks);
+                groups[i].Score = groups[i].Ranks.Average();
+                var group = groups[i];
                 
-                Console.WriteLine($"{data[i].Name} - [{ranks}]");
+                var ranks = String.Join(", ", groups[i].Ranks);
+                
+                Console.WriteLine($"{groups[i].Name} - [{ranks}]");
+            }
+
+            var sorted = groups.OrderBy(group => group.Score).ToList();
+            for (int j = 0; )
+            {
+                
             }
         }
     }

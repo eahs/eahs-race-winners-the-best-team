@@ -22,11 +22,14 @@ namespace RaceWinners
                 
                 var ranks = String.Join(", ", groups[i].Ranks);
                 
-                Console.WriteLine($"{groups[i].Name} - [{ranks}]");
+                
             }
 
             var sorted = groups.OrderBy(group => group.Score).ToList();
-            for (int j = 0; )
+            for (int j = 0; j < sorted.Count; j++)
+            {
+                Console.WriteLine($"{sorted[j].Name} - {j + 1} - average speed {sorted[j].Score}");
+            }
             {
                 
             }
